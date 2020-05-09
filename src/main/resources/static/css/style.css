@@ -1,0 +1,34 @@
+/*公共样式 初始化*/
+@charset "utf-8";
+/* CSS Document */
+*{padding:0;margin:0;text-decoration: none;}
+a,span,p{font-size:14px;color:#000;font-family:"Microsoft YaHei", "Lucida Grande", Helvetica, "Droid Sans", FreeSans, "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "Segoe UI", Arial, Arimo, sans-serif;}
+div,select,input{display:block;}
+input{outline: none;}
+
+/** 去除浏览器填充泛黄背景色样式 **/
+input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {-webkit-box-shadow: 0 0 0 1000px white inset;}
+
+div{border:0px solid green;}
+ul,li{list-style: none;}
+.left{float:left;}
+.right{float:right;}
+.clearfix{clear: both}
+
+.container{width: 100%;}
+
+footer.footer{width: 100%;height: 200px;margin-top: 50px;background-color: #000;}
+
+/** 登录页面 **/
+.login-label{width: 320px;border-radius: 4px;border:1px solid #d7d7d7;margin: 100px auto;background-color: #FCFBF8;padding: 0px 30px;}
+.login-label .title{display: block;width: 320px;font-size: 16px;line-height: 56px;color: #0068b1;text-align: center;border-bottom: 1px solid #d7d7d7;}
+.login-label .ipt-label{width: 300px;height: 36px;padding:0px 10px;background-color: #ffffff;border: 1px solid #d7d7d7;margin-top: 20px;}
+.login-label .ipt-label.first-ipt-label{margin-top: 30px;}
+.login-label .ipt-label .ipt{display: inline-block;width: 300px;height: 36px;border: none;font-size: 14px;color: #959595;line-height: 36px;}
+.login-label .ipt-label .ipt.sm-ipt{width: 160px;}
+.login-label .ipt-label.sm-ipt-label{width: 160px;float: left;}
+.login-label .yzm-label .code-label{cursor: pointer; margin-top: 20px; float: right;height:38px; width: 130px;background-color: #0068b1;font-size: 14px;line-height: 38px;color: #ffffff;text-align: center;}
+.login-label .yzm-label .code-label img{width: 100%;height:100%;}
+.login-label .login-btn{cursor: pointer; width: 320px;height: 40px;background-color: #0068b1;font-size: 16px;color: #ffffff;text-align: center;line-height: 40px;margin-top: 30px;border-radius: 5px;}
+.login-label .desc-label{font-size: 16px;color: #646464;text-align: center;line-height: 50px;}
+.login-label .desc-label a{font-size: 16px;color:#0068b1;}
