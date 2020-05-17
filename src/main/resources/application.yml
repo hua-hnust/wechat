@@ -33,7 +33,7 @@ wechat:
   secretId:
   secretKey:
 
-# 上传文件相关配置 F:/image/
+# 涓婁紶鏂囦欢鐩稿叧閰嶇疆 F:/image/
 upload:
   filePath: /home/image/
 
