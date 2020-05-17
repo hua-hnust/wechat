@@ -2,6 +2,8 @@ package com.wechat.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.*;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
@@ -13,6 +15,11 @@ import java.io.Serializable;
  * @author wyulong
  * @since 2020-05-17
  */
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PoorFamily implements Serializable {
 
     private static final long serialVersionUID=1L;
@@ -75,118 +82,4 @@ public class PoorFamily implements Serializable {
      */
       private LocalDateTime updateTime;
 
-    
-    public Integer getId() {
-        return id;
-    }
-
-      public void setId(Integer id) {
-          this.id = id;
-      }
-    
-    public Integer getUserId() {
-        return userId;
-    }
-
-      public void setUserId(Integer userId) {
-          this.userId = userId;
-      }
-    
-    public String getProvince() {
-        return province;
-    }
-
-      public void setProvince(String province) {
-          this.province = province;
-      }
-    
-    public String getCity() {
-        return city;
-    }
-
-      public void setCity(String city) {
-          this.city = city;
-      }
-    
-    public String getCounty() {
-        return county;
-    }
-
-      public void setCounty(String county) {
-          this.county = county;
-      }
-    
-    public String getDetailAddress() {
-        return detailAddress;
-    }
-
-      public void setDetailAddress(String detailAddress) {
-          this.detailAddress = detailAddress;
-      }
-    
-    public String getTitle() {
-        return title;
-    }
-
-      public void setTitle(String title) {
-          this.title = title;
-      }
-    
-    public String getContent() {
-        return content;
-    }
-
-      public void setContent(String content) {
-          this.content = content;
-      }
-    
-    public String getReply() {
-        return reply;
-    }
-
-      public void setReply(String reply) {
-          this.reply = reply;
-      }
-    
-    public Integer getStatus() {
-        return status;
-    }
-
-      public void setStatus(Integer status) {
-          this.status = status;
-      }
-    
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-      public void setCreateTime(LocalDateTime createTime) {
-          this.createTime = createTime;
-      }
-    
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-      public void setUpdateTime(LocalDateTime updateTime) {
-          this.updateTime = updateTime;
-      }
-
-    @Override
-    public String toString() {
-        return "PoorFamily{" +
-              "id=" + id +
-                  ", userId=" + userId +
-                  ", province=" + province +
-                  ", city=" + city +
-                  ", county=" + county +
-                  ", detailAddress=" + detailAddress +
-                  ", title=" + title +
-                  ", content=" + content +
-                  ", reply=" + reply +
-                  ", status=" + status +
-                  ", createTime=" + createTime +
-                  ", updateTime=" + updateTime +
-              "}";
-    }
 }

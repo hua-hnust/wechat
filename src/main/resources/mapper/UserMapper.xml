@@ -8,6 +8,7 @@
         <result column="user_type" property="userType" />
         <result column="openid" property="openid" />
         <result column="wechat_code" property="wechatCode" />
+        <result column="head_img" property="headImg" />
         <result column="phone" property="phone" />
         <result column="email" property="email" />
         <result column="name" property="name" />

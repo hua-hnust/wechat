@@ -2,6 +2,8 @@ package com.wechat.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.*;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
@@ -13,6 +15,11 @@ import java.io.Serializable;
  * @author wyulong
  * @since 2020-05-17
  */
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
 
     private static final long serialVersionUID=1L;
@@ -34,6 +41,8 @@ public class User implements Serializable {
      * 微信code,获取用户信息的code
      */
       private String wechatCode;
+
+      private String headImg;
 
       /**
      * 手机号码
@@ -75,118 +84,4 @@ public class User implements Serializable {
      */
       private LocalDateTime updateTime;
 
-    
-    public Integer getId() {
-        return id;
-    }
-
-      public void setId(Integer id) {
-          this.id = id;
-      }
-    
-    public Integer getUserType() {
-        return userType;
-    }
-
-      public void setUserType(Integer userType) {
-          this.userType = userType;
-      }
-    
-    public String getOpenid() {
-        return openid;
-    }
-
-      public void setOpenid(String openid) {
-          this.openid = openid;
-      }
-    
-    public String getWechatCode() {
-        return wechatCode;
-    }
-
-      public void setWechatCode(String wechatCode) {
-          this.wechatCode = wechatCode;
-      }
-    
-    public String getPhone() {
-        return phone;
-    }
-
-      public void setPhone(String phone) {
-          this.phone = phone;
-      }
-    
-    public String getEmail() {
-        return email;
-    }
-
-      public void setEmail(String email) {
-          this.email = email;
-      }
-    
-    public String getName() {
-        return name;
-    }
-
-      public void setName(String name) {
-          this.name = name;
-      }
-    
-    public String getPassword() {
-        return password;
-    }
-
-      public void setPassword(String password) {
-          this.password = password;
-      }
-    
-    public String getToken() {
-        return token;
-    }
-
-      public void setToken(String token) {
-          this.token = token;
-      }
-    
-    public LocalDateTime getTokenExpireTime() {
-        return tokenExpireTime;
-    }
-
-      public void setTokenExpireTime(LocalDateTime tokenExpireTime) {
-          this.tokenExpireTime = tokenExpireTime;
-      }
-    
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-      public void setCreateTime(LocalDateTime createTime) {
-          this.createTime = createTime;
-      }
-    
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-      public void setUpdateTime(LocalDateTime updateTime) {
-          this.updateTime = updateTime;
-      }
-
-    @Override
-    public String toString() {
-        return "User{" +
-              "id=" + id +
-                  ", userType=" + userType +
-                  ", openid=" + openid +
-                  ", wechatCode=" + wechatCode +
-                  ", phone=" + phone +
-                  ", email=" + email +
-                  ", name=" + name +
-                  ", password=" + password +
-                  ", token=" + token +
-                  ", tokenExpireTime=" + tokenExpireTime +
-                  ", createTime=" + createTime +
-                  ", updateTime=" + updateTime +
-              "}";
-    }
 }
