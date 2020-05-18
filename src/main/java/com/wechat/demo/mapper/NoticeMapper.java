@@ -1,6 +1,6 @@
 package com.wechat.demo.mapper;
 
-import com.wechat.demo.entity.User;
+import com.wechat.demo.entity.Notice;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author wyulong
  * @since 2020-05-17
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface NoticeMapper extends BaseMapper<Notice> {
 
 }

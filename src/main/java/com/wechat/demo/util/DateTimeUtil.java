@@ -2,6 +2,7 @@ package com.wechat.demo.util;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -22,6 +23,10 @@ public class DateTimeUtil {
     public static LocalDateTime formatStringToLocalDateTime(String time,String pattern){
         DateTimeFormatter df = DateTimeFormatter.ofPattern(pattern);
         return LocalDateTime.parse(time,df);
+    }
+
+    public static LocalDateTime toLocalDateTime(long timestamp){
+        return LocalDateTime.ofEpochSecond(timestamp,0, ZoneOffset.ofHours(8));
     }
 
 }
