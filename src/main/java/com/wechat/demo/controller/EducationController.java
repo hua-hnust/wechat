@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class EducationController {
 
     @Autowired
     private UserService userService;
-    @Autowired
+    @Resource
     private EducationMapper educationMapper;
 
     @Autowired
