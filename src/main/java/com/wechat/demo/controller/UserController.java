@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -47,7 +48,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Value("${wechat.appId}")
@@ -87,20 +88,16 @@ public class UserController {
         user = User.builder().openid(openId).build();
         existedUser = userMapper.selectOne(new QueryWrapper<>(user));
         if (existedUser != null){
-            LocalDateTime tokenExpireTime = existedUser.getTokenExpireTime();
-            if (tokenExpireTime.isAfter(LocalDateTime.now())){
-                userInfo.setName(existedUser.getName());
-                userInfo.setRole(Enums.valueOf(existedUser.getUserType(), UserRole.class).getDesc());
-                userInfo.setToken(existedUser.getToken());
-                userInfo.setHeadImg(existedUser.getHeadImg());
-                return userInfo;
-            }
+            existedUser.setTokenExpireTime(LocalDateTime.now().plusHours(2));
+            userMapper.updateById(existedUser);
+            userInfo.setName(existedUser.getName());
+            userInfo.setRole(Enums.valueOf(existedUser.getUserType(), UserRole.class).getDesc());
+            userInfo.setToken(existedUser.getToken());
+            userInfo.setHeadImg(existedUser.getHeadImg());
+            return userInfo;
         }
 
-
-
         WechatBaseInfo wechatBaseInfo = WechatAuthHelper.getGzhH5UserInfo(accessToken, openId);
-
         User newUser =  new User();
         newUser.setUserType(UserRole.USER.getCode());
         newUser.setOpenid(openId);

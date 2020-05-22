@@ -32,4 +32,10 @@ public class UserService extends ServiceImpl<UserMapper, User>   {
         query.setToken(SessionContext.getRemoteSid());
         return userMapper.selectOne(new QueryWrapper<>(query).gt("token_expire_time", LocalDateTime.now()));
     }
+
+    public User getByOpenId(String openId) {
+        User query = new User();
+        query.setOpenid(openId);
+        return userMapper.selectOne(new QueryWrapper<>(query));
+    }
 }
