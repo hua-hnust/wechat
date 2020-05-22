@@ -7,9 +7,12 @@ import com.wechat.demo.constants.CommonConstants;
 import com.wechat.demo.constants.Enums;
 import com.wechat.demo.constants.UserRole;
 import com.wechat.demo.dto.req.LoginParam;
+import com.wechat.demo.dto.req.RegisterDTO;
+import com.wechat.demo.dto.rsp.LoginInfoDTO;
 import com.wechat.demo.dto.rsp.UserInfo;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.UserMapper;
+import com.wechat.demo.service.AuthService;
 import com.wechat.demo.service.UserService;
 import com.wechat.demo.util.DateTimeUtil;
 import com.wechat.demo.util.WechatAuthHelper;
@@ -19,18 +22,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
+
+import static com.wechat.demo.constants.Errors.INVALID_TOKEN;
+import static com.wechat.demo.constants.Errors.of;
 
 /**
  * <p>
@@ -40,7 +44,7 @@ import java.util.UUID;
  * @author wyulong
  * @since 2020-05-17
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
@@ -57,9 +61,11 @@ public class UserController {
     @Value("${wechat.secretKey}")
     private String secretKey;
 
+    @Autowired
+    private AuthService authService;
+
 
     @OpenApi
-    @ResponseBody
     @PostMapping("/wechat/login")
     public UserInfo wechatLogin(@RequestBody LoginParam param){
 
@@ -122,5 +128,58 @@ public class UserController {
         userInfo.setHeadImg(newUser.getHeadImg());
         return userInfo;
     }
+    /**
+     *  登录接口
+     * @param param
+     * @return
+     */
+    @PostMapping("/login")
+    @OpenApi
+    public UserInfo login(@RequestBody LoginParam param){
+        return authService.verifyPhoneAndPassword(param.getPhone(), param.getPassword());
+    }
+
+    /**
+     *  注册接口
+     * @param registerDTO
+     * @return
+     */
+    @PostMapping("/register")
+    @OpenApi
+    public Boolean register(@RequestBody RegisterDTO registerDTO){
+        return authService.register(registerDTO);
+    }
+
+
+
+    /**
+     *  注册接口
+     * @param
+     * @return
+     */
+    @GetMapping("/info")
+    public UserInfo register(){
+        User user = userService.currentUser();
+        UserRole userRole = Enums.valueOf(user.getUserType(), UserRole.class);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setToken(user.getToken());
+        userInfo.setName(user.getName());
+        userInfo.setRole(userRole == null ? "未知" : userRole.getDesc());
+        userInfo.setHeadImg(user.getHeadImg());
+        return userInfo;
+    }
+
+    /**
+     *  退出登录
+     * @return
+     */
+    @PostMapping("logout")
+    public Boolean logout(){
+        User currentUser = Optional.ofNullable(userService.currentUser()).orElseThrow(() -> of(INVALID_TOKEN));
+        currentUser.setTokenExpireTime(LocalDateTime.now());
+        return userService.updateById(currentUser);
+    }
+
+
 }
 
