@@ -173,7 +173,7 @@ public class UserController {
      *  退出登录
      * @return
      */
-    @PostMapping("logout")
+    @PostMapping("/logout")
     public Boolean logout(){
         User currentUser = Optional.ofNullable(userService.currentUser()).orElseThrow(() -> of(INVALID_TOKEN));
         currentUser.setTokenExpireTime(LocalDateTime.now());

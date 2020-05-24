@@ -2,14 +2,15 @@ package com.wechat.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
+import com.wechat.demo.dto.req.EducationFilter;
 import com.wechat.demo.entity.Education;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.EducationMapper;
 import com.wechat.demo.service.EducationService;
 import com.wechat.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,7 +25,7 @@ import java.util.List;
  * @author wyulong
  * @since 2020-05-17
  */
-@Controller
+@RestController
 @RequestMapping("/education")
 public class EducationController {
 
@@ -37,7 +38,6 @@ public class EducationController {
     private EducationService educationService;
 
     @PostMapping("/addEducation")
-    @ResponseBody
     public void addEducation(@RequestBody Education education) {
         Education newEducation = new Education();
         User user = userService.currentUser();
@@ -55,7 +55,6 @@ public class EducationController {
     }
 
     @PostMapping("/listEducation")
-    @ResponseBody
     public List<Education> listEducation() {
         User user = userService.currentUser();
         Education build = Education.builder().userId(user.getId()).build();
@@ -63,13 +62,11 @@ public class EducationController {
     }
 
     @GetMapping("/getEducation")
-    @ResponseBody
     public Education getEducation(@RequestParam("id") String id)  {
         return educationMapper.selectById(id);
     }
 
     @PostMapping("/editEducation")
-    @ResponseBody
     public void editEducation(@RequestBody Education education)  {
         Education oldEdu = educationMapper.selectById(education.getId());
         oldEdu.setSchool(education.getSchool());
@@ -83,13 +80,28 @@ public class EducationController {
     }
 
     @PostMapping("/deleteEducation")
-    @ResponseBody
     public void deleteEducation(@RequestBody Education education)  {
         Education oldEdu = educationMapper.selectById(education.getId());
         if (oldEdu != null){
             educationService.removeById(oldEdu.getId());
         }
     }
+
+    @PostMapping("/admin/listEducation")
+    public IPage<Education> getAdminListEducations(@RequestBody EducationFilter filter)  {
+        return educationService.getAdminListEducations(filter.getPage(),filter.getLimit(),filter.getStatus());
+    }
+
+    @PostMapping("/admin/editEducation")
+    public void editAdminEducation(@RequestBody Education education)  {
+        Education oldEdu = educationMapper.selectById(education.getId());
+        oldEdu.setStatus(education.getStatus());
+        oldEdu.setReply(education.getReply());
+        oldEdu.setUpdateTime(LocalDateTime.now());
+        educationService.updateById(oldEdu);
+    }
+
+
 
 }
 
