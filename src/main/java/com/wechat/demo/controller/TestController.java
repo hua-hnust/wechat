@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Author xhua
  * @Date 2020/5/8 11:49
  **/
-@Controller
+@RestController
 @RequestMapping("test")
 public class TestController {
 

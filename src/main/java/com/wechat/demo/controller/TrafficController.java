@@ -2,7 +2,9 @@ package com.wechat.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.entity.Traffic;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.TrafficMapper;
@@ -25,7 +27,7 @@ import java.util.List;
  * @author wyulong
  * @since 2020-05-17
  */
-@Controller
+@RestController
 @RequestMapping("/traffic")
 public class TrafficController {
 
@@ -87,6 +89,21 @@ public class TrafficController {
         if (oldEdu != null){
             trafficService.removeById(oldEdu.getId());
         }
+    }
+
+
+    @PostMapping("/admin/list")
+    public IPage<Traffic> getAdminList(@RequestBody BusinessFilter filter)  {
+        return trafficService.getAdminListTraffic(filter.getPage(),filter.getLimit(),filter.getStatus());
+    }
+
+    @PostMapping("/admin/edit")
+    public void editAdminData(@RequestBody Traffic traffic)  {
+        Traffic oldData = trafficMapper.selectById(traffic.getId());
+        oldData.setStatus(traffic.getStatus());
+        oldData.setReply(traffic.getReply());
+        oldData.setUpdateTime(LocalDateTime.now());
+        trafficService.updateById(oldData);
     }
 }
 

@@ -25,7 +25,7 @@ import java.util.List;
  * @author wyulong
  * @since 2020-05-17
  */
-@Controller
+@RestController
 @RequestMapping("/consultMessage")
 public class ConsultMessageController {
     @Autowired

@@ -4,7 +4,7 @@ package com.wechat.demo.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
-import com.wechat.demo.dto.req.EducationFilter;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.entity.Education;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.EducationMapper;
@@ -88,7 +88,7 @@ public class EducationController {
     }
 
     @PostMapping("/admin/listEducation")
-    public IPage<Education> getAdminListEducations(@RequestBody EducationFilter filter)  {
+    public IPage<Education> getAdminListEducations(@RequestBody BusinessFilter filter)  {
         return educationService.getAdminListEducations(filter.getPage(),filter.getLimit(),filter.getStatus());
     }
 
