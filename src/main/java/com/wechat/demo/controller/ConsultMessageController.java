@@ -2,8 +2,11 @@ package com.wechat.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.entity.ConsultMessage;
+import com.wechat.demo.entity.Traffic;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.ConsultMessageMapper;
 import com.wechat.demo.service.ConsultMessageService;
@@ -85,5 +88,19 @@ public class ConsultMessageController {
             consultMessageService.removeById(oldEdu.getId());
         }
     }
+    @PostMapping("/admin/list")
+    public IPage<ConsultMessage> getAdminList(@RequestBody BusinessFilter filter)  {
+        return consultMessageService.getAdminList(filter.getPage(),filter.getLimit(),filter.getStatus());
+    }
+
+    @PostMapping("/admin/edit")
+    public void editAdminData(@RequestBody ConsultMessage traffic)  {
+        ConsultMessage oldData = consultMessageMapper.selectById(traffic.getId());
+        oldData.setStatus(traffic.getStatus());
+        oldData.setReply(traffic.getReply());
+        oldData.setUpdateTime(LocalDateTime.now());
+        consultMessageService.updateById(oldData);
+    }
+
 }
 

@@ -1,21 +1,17 @@
 package com.wechat.demo.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.entity.Guidance;
-import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.GuidanceMapper;
 import com.wechat.demo.service.GuidanceService;
-import com.wechat.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * <p>
@@ -29,7 +25,7 @@ import java.util.List;
 @RequestMapping("/guidance")
 public class GuidanceController {
 
-    @Autowired
+    @Resource
     private GuidanceMapper guidanceMapper;
 
     @Resource
@@ -51,9 +47,8 @@ public class GuidanceController {
 
     @PostMapping("/listGuidance")
     @ResponseBody
-    public List<Guidance> listGuidance() {
-        Guidance build = Guidance.builder().build();
-        return guidanceMapper.selectList(new QueryWrapper<>(build));
+    public IPage<Guidance> listGuidance(@RequestBody BusinessFilter filter)  {
+        return guidanceService.selectList(filter.getPage(),filter.getLimit(),filter.getType());
     }
 
     @GetMapping("/getGuidance")

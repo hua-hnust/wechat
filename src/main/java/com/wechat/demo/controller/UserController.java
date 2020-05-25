@@ -187,12 +187,15 @@ public class UserController {
 
     @PostMapping("/admin/list")
     public IPage<User> getAdminList(@RequestBody BusinessFilter filter)  {
-        return userService.getAdminList(filter.getPage(),filter.getLimit());
+        return userService.getAdminList(filter.getPage(),filter.getLimit(),filter.getType());
     }
 
     @PostMapping("/admin/edit")
     public void editAdminData(@RequestBody User user)  {
         User oldData = userMapper.selectById(user.getId());
+        if (oldData.getUserType() == 0){
+            oldData.setPhone(user.getPhone());
+        }
         oldData.setHeadImg(user.getHeadImg());
         oldData.setName(user.getName());
         oldData.setEmail(user.getEmail());

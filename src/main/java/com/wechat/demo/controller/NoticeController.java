@@ -1,19 +1,16 @@
 package com.wechat.demo.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wechat.demo.constants.BusinessStatus;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.entity.Notice;
 import com.wechat.demo.mapper.NoticeMapper;
 import com.wechat.demo.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * <p>
@@ -28,7 +25,7 @@ import java.util.List;
 public class NoticeController {
 
 
-    @Autowired
+    @Resource
     private NoticeMapper noticeMapper;
 
     @Resource
@@ -49,9 +46,8 @@ public class NoticeController {
 
     @PostMapping("/listNotice")
     @ResponseBody
-    public List<Notice> listNotice() {
-        Notice build = Notice.builder().build();
-        return noticeMapper.selectList(new QueryWrapper<>(build));
+    public IPage<Notice> listNotice(@RequestBody BusinessFilter filter) {
+        return noticeService.selectList(filter.getPage(),filter.getLimit(),filter.getKey());
     }
 
     @GetMapping("/getNotice")
