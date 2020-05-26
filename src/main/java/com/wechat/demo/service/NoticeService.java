@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wechat.demo.entity.Notice;
 import com.wechat.demo.mapper.NoticeMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +24,9 @@ public class NoticeService extends ServiceImpl<NoticeMapper, Notice> {
 
         Page<Notice> ipage = new Page<>(page, limit);
         QueryWrapper<Notice> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("department", key);
+        if (StringUtils.isNotBlank(key)){
+            queryWrapper.like("department", key);
+        }
         IPage<Notice> pageData = this.page(ipage, queryWrapper);
         return pageData;
     }
