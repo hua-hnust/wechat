@@ -2,8 +2,11 @@ package com.wechat.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.entity.Disability;
+import com.wechat.demo.entity.PoorFamily;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.DisabilityMapper;
 import com.wechat.demo.service.DisabilityService;
@@ -25,7 +28,7 @@ import java.util.List;
  * @author wyulong
  * @since 2020-05-17
  */
-@Controller
+@RestController
 @RequestMapping("/disability")
 public class DisabilityController {
     @Autowired
@@ -92,6 +95,21 @@ public class DisabilityController {
         if (oldEdu != null){
             disabilityService.removeById(oldEdu.getId());
         }
+    }
+
+
+    @PostMapping("/admin/list")
+    public IPage<Disability> getAdminList(@RequestBody BusinessFilter filter)  {
+        return disabilityService.getAdminList(filter.getPage(),filter.getLimit(),filter.getStatus());
+    }
+
+    @PostMapping("/admin/edit")
+    public void editAdminData(@RequestBody Disability data)  {
+        Disability oldData = disabilityMapper.selectById(data.getId());
+        oldData.setStatus(data.getStatus());
+        oldData.setReply(data.getReply());
+        oldData.setUpdateTime(LocalDateTime.now());
+        disabilityService.updateById(oldData);
     }
 }
 

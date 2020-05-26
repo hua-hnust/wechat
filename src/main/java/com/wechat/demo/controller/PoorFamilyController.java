@@ -2,9 +2,12 @@ package com.wechat.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.entity.PoorFamily;
 import com.wechat.demo.entity.PoorFamily;
+import com.wechat.demo.entity.Traffic;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.PoorFamilyMapper;
 import com.wechat.demo.mapper.PoorFamilyMapper;
@@ -28,7 +31,7 @@ import java.util.List;
  * @author wyulong
  * @since 2020-05-17
  */
-@Controller
+@RestController
 @RequestMapping("/poorFamily")
 public class PoorFamilyController {
 
@@ -97,5 +100,20 @@ public class PoorFamilyController {
             poorFamilyService.removeById(oldEdu.getId());
         }
     }
+
+    @PostMapping("/admin/list")
+    public IPage<PoorFamily> getAdminList(@RequestBody BusinessFilter filter)  {
+        return poorFamilyService.getAdminList(filter.getPage(),filter.getLimit(),filter.getStatus());
+    }
+
+    @PostMapping("/admin/edit")
+    public void editAdminData(@RequestBody PoorFamily traffic)  {
+        PoorFamily oldData = poorFamilyMapper.selectById(traffic.getId());
+        oldData.setStatus(traffic.getStatus());
+        oldData.setReply(traffic.getReply());
+        oldData.setUpdateTime(LocalDateTime.now());
+        poorFamilyService.updateById(oldData);
+    }
+
 }
 

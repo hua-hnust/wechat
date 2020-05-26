@@ -2,7 +2,10 @@ package com.wechat.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.constants.BusinessStatus;
+import com.wechat.demo.dto.req.BusinessFilter;
+import com.wechat.demo.entity.ComplainMessage;
 import com.wechat.demo.entity.ComplainMessage;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.ComplainMessageMapper;
@@ -25,7 +28,7 @@ import java.util.List;
  * @author wyulong
  * @since 2020-05-17
  */
-@Controller
+@RestController
 @RequestMapping("/complainMessage")
 public class ComplainMessageController {
     @Autowired
@@ -84,6 +87,20 @@ public class ComplainMessageController {
         if (oldEdu != null){
             complainMessageService.removeById(oldEdu.getId());
         }
+    }
+
+    @PostMapping("/admin/list")
+    public IPage<ComplainMessage> getAdminList(@RequestBody BusinessFilter filter)  {
+        return complainMessageService.getAdminList(filter.getPage(),filter.getLimit(),filter.getStatus());
+    }
+
+    @PostMapping("/admin/edit")
+    public void editAdminData(@RequestBody ComplainMessage traffic)  {
+        ComplainMessage oldData = complainMessageMapper.selectById(traffic.getId());
+        oldData.setStatus(traffic.getStatus());
+        oldData.setReply(traffic.getReply());
+        oldData.setUpdateTime(LocalDateTime.now());
+        complainMessageService.updateById(oldData);
     }
 }
 

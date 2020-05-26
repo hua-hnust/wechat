@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-05-24 20:09:34
+Date: 2020-05-26 10:30:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,11 +29,12 @@ CREATE TABLE `complain_message` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of complain_message
 -- ----------------------------
+INSERT INTO `complain_message` VALUES ('1', '1', '暗示法', '啊短发啊速度发爱的发顺丰', null, '0', '2020-05-26 04:20:38', '2020-05-26 04:20:38');
 
 -- ----------------------------
 -- Table structure for consult_message
@@ -49,11 +50,12 @@ CREATE TABLE `consult_message` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of consult_message
 -- ----------------------------
+INSERT INTO `consult_message` VALUES ('1', '1', '微信怎么登录', '不知道怎么搞，谁能告诉我', null, '0', '2020-05-26 03:57:05', '2020-05-26 04:11:14');
 
 -- ----------------------------
 -- Table structure for disability
@@ -102,10 +104,7 @@ CREATE TABLE `education` (
 -- ----------------------------
 -- Records of education
 -- ----------------------------
-INSERT INTO `education` VALUES ('5', '1', '湖南科技大雪', '2020', '计算机科学', '啊就是地方', '萨法', null, '0', '2020-05-17 23:05:39', '2020-05-17 23:05:39');
-INSERT INTO `education` VALUES ('7', '1', '湖南科技大学', '2020', '网络工程', '学校科研经费紧张', '小星星啊啊啊456', null, '0', '2020-05-18 01:34:34', '2020-05-23 03:16:25');
-INSERT INTO `education` VALUES ('8', '1', '123', '2020', '123', '312', '1412', null, '0', '2020-05-23 03:13:10', '2020-05-23 03:13:10');
-INSERT INTO `education` VALUES ('9', '1', '123', '2020', '4324', '3456262', '436563', null, '0', '2020-05-23 03:16:13', '2020-05-23 03:16:13');
+INSERT INTO `education` VALUES ('7', '1', '湖南科技大学', '2020', '网络工程', '学校科研经费紧张', '小星星啊啊啊456', '暗示法', '0', '2020-05-18 01:34:34', '2020-05-24 20:29:35');
 
 -- ----------------------------
 -- Table structure for graduate
@@ -145,11 +144,13 @@ CREATE TABLE `guidance` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of guidance
 -- ----------------------------
+INSERT INTO `guidance` VALUES ('1', '2', '交通业务指南', '交通业务指南内容', null, '0', '2020-05-26 00:40:19', '2020-05-26 00:42:15');
+INSERT INTO `guidance` VALUES ('2', '3', '社保业务指南', '社保业务指南', null, '0', '2020-05-26 00:42:33', '2020-05-26 00:42:33');
 
 -- ----------------------------
 -- Table structure for insurance
@@ -166,11 +167,13 @@ CREATE TABLE `insurance` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of insurance
 -- ----------------------------
+INSERT INTO `insurance` VALUES ('1', '1', '202005', '10', '4', null, '0', '2020-05-26 03:16:13', '2020-05-26 03:33:38');
+INSERT INTO `insurance` VALUES ('2', '1', '202004', '200', '1', null, '0', '2020-05-26 03:30:05', '2020-05-26 03:30:05');
 
 -- ----------------------------
 -- Table structure for notice
@@ -184,11 +187,12 @@ CREATE TABLE `notice` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of notice
 -- ----------------------------
+INSERT INTO `notice` VALUES ('1', '桃源街道办事处', '桃源街道办事处内部整顿通知', '桃源街道办事处内部整顿桃源街道办事处内部整顿通知桃源街道办事处内部整顿通知', '2020-05-26 01:00:01', '2020-05-26 01:00:01');
 
 -- ----------------------------
 -- Table structure for poor_family
@@ -213,9 +217,8 @@ CREATE TABLE `poor_family` (
 -- ----------------------------
 -- Records of poor_family
 -- ----------------------------
-INSERT INTO `poor_family` VALUES ('1', '1', '湖南省', '湘潭市', '雨湖区', '桃源街道12号', '温饱问题解决不了', '温饱问题解决不了翠竹新村', null, '0', '2020-05-22 01:22:26', '2020-05-22 01:22:26');
+INSERT INTO `poor_family` VALUES ('1', '1', '湖南省', '湘潭市', '雨湖区', '桃源街道12号', '温饱问题解决不了', '温饱问题解决不了翠竹新村', '啊速度发', '1', '2020-05-22 01:22:26', '2020-05-24 22:02:46');
 INSERT INTO `poor_family` VALUES ('2', '1', '接口', '家里', 'tk拿', '金履路口', '溜了溜了', '恐龙图', null, '0', '2020-05-22 02:27:50', '2020-05-22 02:27:50');
-INSERT INTO `poor_family` VALUES ('3', '1', '436', '3456', '3456', '3456', '3456', '3456', null, '0', '2020-05-23 03:17:02', '2020-05-23 03:17:02');
 
 -- ----------------------------
 -- Table structure for traffic
@@ -237,7 +240,7 @@ CREATE TABLE `traffic` (
 -- ----------------------------
 -- Records of traffic
 -- ----------------------------
-INSERT INTO `traffic` VALUES ('1', '1', '湘A12345', '汽车保险续保办理难', '汽车保险续保办理难aaa', null, '0', '2020-05-22 01:04:02', '2020-05-22 01:04:02');
+INSERT INTO `traffic` VALUES ('1', '1', '湘A12345', '汽车保险续保办理难', '汽车保险续保办理难aaa', '啊的萨芬', '1', '2020-05-22 01:04:02', '2020-05-24 22:00:11');
 
 -- ----------------------------
 -- Table structure for user
@@ -263,6 +266,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '0', 'oZyDKs2kO_hXs-dPAm4c7BS7UVYA', '061rgmUG0lTPHf24mvRG0zBiUG0rgmU5', 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJXOe1iaxvelDsv9HJ2dJe6u2TP6KQxfhdibJ4IUu2aeibGlJ9q2d7f0hicw17NMtrgLOSvj1b5XQ247w/132', null, null, '落羽', null, 'eb33c0ae-d81c-4449-9f09-1112399e9ede', '2020-05-23 05:34:32', '2020-05-17 21:31:38', '2020-05-17 21:31:38');
-INSERT INTO `user` VALUES ('3', '0', 'oZyDKs_x25zebzCxeP67oGsF_zuQ', '071RnvUR04JA852c4hTR0JWcUR0RnvUv', 'http://thirdwx.qlogo.cn/mmopen/vi_32/4zKLZ8AJ5h0ibShaOkDy2LQz3Bn9aNN7RssW7Ugo9z8TrODtnRuK2Skq3hMb1a4Py6nDk6o3ZxSfu3Tl2WLkctQ/132', null, null, '雅', null, '896cd34c-138f-4fb3-b3d1-7e117051c31b', '2020-05-23 00:56:13', '2020-05-22 22:54:25', '2020-05-22 22:54:25');
-INSERT INTO `user` VALUES ('4', '1', null, null, 'http://thirdwx.qlogo.cn/mmopen/vi_32/4zKLZ8AJ5h0ibShaOkDy2LQz3Bn9aNN7RssW7Ugo9z8TrODtnRuK2Skq3hMb1a4Py6nDk6o3ZxSfu3Tl2WLkctQ/132', '15211111111', null, '超级管理员', '96e79218965eb72c92a549dd5a330112', '4221f91a-4507-4389-ba71-3094bd996259', '2020-05-24 22:08:50', '2020-05-23 01:49:37', null);
+INSERT INTO `user` VALUES ('1', '0', 'oZyDKs2kO_hXs-dPAm4c7BS7UVYA', '061rgmUG0lTPHf24mvRG0zBiUG0rgmU5', 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJXOe1iaxvelDsv9HJ2dJe6u2TP6KQxfhdibJ4IUu2aeibGlJ9q2d7f0hicw17NMtrgLOSvj1b5XQ247w/132', '634563456', '1233@qq.com', '落羽', null, 'eb33c0ae-d81c-4449-9f09-1112399e9ede', '2020-05-26 06:35:32', '2020-05-17 21:31:38', '2020-05-26 02:20:14');
+INSERT INTO `user` VALUES ('3', '0', 'oZyDKs_x25zebzCxeP67oGsF_zuQ', '071RnvUR04JA852c4hTR0JWcUR0RnvUv', 'http://thirdwx.qlogo.cn/mmopen/vi_32/4zKLZ8AJ5h0ibShaOkDy2LQz3Bn9aNN7RssW7Ugo9z8TrODtnRuK2Skq3hMb1a4Py6nDk6o3ZxSfu3Tl2WLkctQ/132', '43656365463', '555@qq.com', '雅', null, '896cd34c-138f-4fb3-b3d1-7e117051c31b', '2020-05-23 00:56:13', '2020-05-22 22:54:25', '2020-05-26 02:20:06');
+INSERT INTO `user` VALUES ('4', '1', null, null, 'http://thirdwx.qlogo.cn/mmopen/vi_32/4zKLZ8AJ5h0ibShaOkDy2LQz3Bn9aNN7RssW7Ugo9z8TrODtnRuK2Skq3hMb1a4Py6nDk6o3ZxSfu3Tl2WLkctQ/132', '15211111111', 'email@qq.com', '超级管理员', '96e79218965eb72c92a549dd5a330112', '4d9a15cd-945d-4b90-ba70-ab18e82a6576', '2020-05-26 05:42:24', '2020-05-23 01:49:37', '2020-05-26 02:11:14');

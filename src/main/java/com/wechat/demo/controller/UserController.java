@@ -2,14 +2,17 @@ package com.wechat.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wechat.demo.annotation.OpenApi;
 import com.wechat.demo.constants.CommonConstants;
 import com.wechat.demo.constants.Enums;
 import com.wechat.demo.constants.UserRole;
+import com.wechat.demo.dto.req.BusinessFilter;
 import com.wechat.demo.dto.req.LoginParam;
 import com.wechat.demo.dto.req.RegisterDTO;
 import com.wechat.demo.dto.rsp.LoginInfoDTO;
 import com.wechat.demo.dto.rsp.UserInfo;
+import com.wechat.demo.entity.Traffic;
 import com.wechat.demo.entity.User;
 import com.wechat.demo.mapper.UserMapper;
 import com.wechat.demo.service.AuthService;
@@ -180,6 +183,35 @@ public class UserController {
         return userService.updateById(currentUser);
     }
 
+
+
+    @PostMapping("/admin/list")
+    public IPage<User> getAdminList(@RequestBody BusinessFilter filter)  {
+        return userService.getAdminList(filter.getPage(),filter.getLimit(),filter.getType());
+    }
+
+    @PostMapping("/admin/edit")
+    public void editAdminData(@RequestBody User user)  {
+        User oldData = userMapper.selectById(user.getId());
+        if (oldData.getUserType() == 0){
+            oldData.setPhone(user.getPhone());
+        }
+        oldData.setHeadImg(user.getHeadImg());
+        oldData.setName(user.getName());
+        oldData.setEmail(user.getEmail());
+        oldData.setUpdateTime(LocalDateTime.now());
+        userService.updateById(oldData);
+    }
+
+    @PostMapping("/admin/add")
+    public void addAdminData(@RequestBody User user)  {
+        user.setId(null);
+        user.setHeadImg(user.getHeadImg());
+        user.setName(user.getName());
+        user.setEmail(user.getEmail());
+        user.setUpdateTime(LocalDateTime.now());
+        userService.updateById(user);
+    }
 
 }
 
